@@ -2,12 +2,14 @@
 # GROVEKIT
 
 Lightweight, self-hosted, opinionated IoT stack built on the
-[Homie MQTT convention][homie].
+[Homie MQTT convention][homie], [Node.js] and [TypeScript].
 
 ## Table of Contents
 
 - [Goals](#goals)
 - [Components](#components)
+- [Quick start](#quick-start)
+- [Building](#building)
 - [Dependencies](#dependencies)
 - [License](#license)
 
@@ -51,18 +53,74 @@ to):
 
 ## Components
 
-Grovekit
+Grovekit provides the following services:
 
 - **Control**: management dashboard for browsing, monitoring and controlling
   connected devices.
+  See [./packages/services/control](./packages/services/control).
 - **Scribe**: background service that keeps track of changes in the state of
   connected devices.
+  See [./packages/services/scribe](./packages/services/scribe).
 
-Grovekit also offers the following libraries:
+Grovekit also provides the following libraries:
 
-- **homie-client**:
+- **homie-client**: a library for publishing and interacting with devices
+  implementing the [Homie MQTT convention][homie] via a shared MQTT broker.
+  See [./packages/libraries/homie-client](./packages/libraries/homie-client).
 
-Other modules
+## Quick start
+
+TBD
+
+## Building
+
+Clone the repository:
+
+```sh
+git clone https://github.com/grovekit/grovekit
+cd grovekit
+```
+
+Install the dependencies of all components:
+
+```sh
+npm install
+```
+
+Launch the TypeScript compiler for the entire project:
+
+```sh
+npm run ts:watch
+```
+
+In a different terminal, launch the **scribe** service:
+
+```sh
+export GK_DB_URL="postgresql://ucp:ucp@127.0.0.1:5433/ucp"
+export GK_LOG_LEVEL="trace"
+export GK_HOMIE_URL="mqtt://127.0.0.1:1884"
+
+cd packages/services/scribe
+node --watch --enable-source-maps dist/server.js
+```
+
+In a different terminal, launch the **control** service:
+
+```sh
+export GK_DB_URL="postgresql://ucp:ucp@127.0.0.1:5433/ucp"
+export GK_LOG_LEVEL="trace"
+export GK_HTTP_PORT=8089
+export GK_HTTP_ADDR=127.0.0.1
+export GK_HOMIE_URL="mqtt://127.0.0.1:1884"
+
+cd packages/services/control
+npm run scss:build
+node --watch --enable-source-maps dist/server.js
+```
+
+The dashboard will be accessible at `http://127.0.0.1:8089`.
+
+
 
 ## Dependencies
 
@@ -95,3 +153,5 @@ are welcome and encouraged.
 [kysely]: https://github.com/kysely-org/kysely
 [opifex]: https://github.com/seriousme/opifex
 [LICENSE]: ./LICENSE
+[Node.js]: https://nodejs.org
+[TypeScript]: https://www.typescriptlang.org
