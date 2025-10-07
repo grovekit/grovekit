@@ -6,12 +6,52 @@ Lightweight, self-hosted, opinionated IoT stack built on the
 
 ## Table of Contents
 
-- [Goals](#goals)
+- [License](#license)
+- [Author](#author)
+- [Status](#status)
 - [Components](#components)
 - [Quick start](#quick-start)
 - [Building](#building)
+- [Goals](#goals)
 - [Dependencies](#dependencies)
-- [License](#license)
+
+## License
+
+Grovekit is licensed under the MIT License. See the [LICENSE] file for details.
+
+## Author
+
+Grovekit is developed by [jacoscaz](https://github.com/jacoscaz). Contributions
+are welcome and encouraged.
+
+## Status
+
+As of 2025-10-07, Grovekit is currently in pre-alpha development.
+
+## Components
+
+Grovekit provides the following services:
+
+- **Control**: management dashboard for browsing, monitoring and controlling
+  connected devices.
+  See [./packages/services/control](./packages/services/control).
+- **Scribe**: background service that keeps track of changes in the state of
+  connected devices.
+  See [./packages/services/scribe](./packages/services/scribe).
+
+Grovekit also provides the following libraries:
+
+- **`@grovekit/homie-client`**: a library for publishing and interacting with devices
+  implementing the [Homie MQTT convention][homie] via a shared MQTT broker.
+  See [./packages/libraries/homie-client](./packages/libraries/homie-client).
+
+## Quick start
+
+See [./docs/QUICK-START.md](./docs/QUICK-START.md)
+
+## Building and running locally
+
+See [./docs/BUILDING.md](./docs/BUILDING.md)
 
 ## Goals
 
@@ -51,77 +91,6 @@ to):
   the stack's performance is to make it more efficient, resorting to scaling
   only when efficiency cannot be reasonably increased any further.
 
-## Components
-
-Grovekit provides the following services:
-
-- **Control**: management dashboard for browsing, monitoring and controlling
-  connected devices.
-  See [./packages/services/control](./packages/services/control).
-- **Scribe**: background service that keeps track of changes in the state of
-  connected devices.
-  See [./packages/services/scribe](./packages/services/scribe).
-
-Grovekit also provides the following libraries:
-
-- **homie-client**: a library for publishing and interacting with devices
-  implementing the [Homie MQTT convention][homie] via a shared MQTT broker.
-  See [./packages/libraries/homie-client](./packages/libraries/homie-client).
-
-## Quick start
-
-TBD
-
-## Building
-
-Clone the repository:
-
-```sh
-git clone https://github.com/grovekit/grovekit
-cd grovekit
-```
-
-Install the dependencies of all components:
-
-```sh
-npm install
-```
-
-Launch the TypeScript compiler for the entire project:
-
-```sh
-npm run ts:watch
-```
-
-In a different terminal, launch the **scribe** service:
-
-```sh
-export GK_DB_URL="postgresql://ucp:ucp@127.0.0.1:5433/ucp"
-export GK_LOG_LEVEL="trace"
-export GK_HOMIE_URL="mqtt://127.0.0.1:1884"
-
-cd packages/services/scribe
-node --watch --enable-source-maps dist/server.js
-```
-
-In a different terminal, launch the **control** service:
-
-```sh
-export GK_DB_URL="postgresql://ucp:ucp@127.0.0.1:5433/ucp"
-export GK_LOG_LEVEL="trace"
-export GK_HTTP_PORT=8089
-export GK_HTTP_ADDR=127.0.0.1
-export GK_HOMIE_URL="mqtt://127.0.0.1:1884"
-
-cd packages/services/control
-npm run scss:build
-node --watch --enable-source-maps dist/server.js
-```
-
-The dashboard will be accessible at `http://127.0.0.1:8089`.
-
-
-
 ## Dependencies
 
 Grovekit would not be possible without an ecosystem of open-source projects
@@ -137,14 +106,7 @@ include, but are not limited to:
 All of these packages have minimal dependency counts (usually zero) and a
 strong focus on performance and user experience.
 
-## License
 
-Grovekit is licensed under the MIT License. See the [LICENSE] file for details.
-
-## Author
-
-Grovekit is developed by [jacoscaz](https://github.com/jacoscaz). Contributions
-are welcome and encouraged.
 
 [homie]: https://homieiot.github.io
 [hono]: https://hono.dev
@@ -155,3 +117,4 @@ are welcome and encouraged.
 [LICENSE]: ./LICENSE
 [Node.js]: https://nodejs.org
 [TypeScript]: https://www.typescriptlang.org
+[@deepkit/type]: https://deepkit.io/en/documentation/runtime-types/getting-started
