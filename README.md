@@ -74,6 +74,7 @@ include, but are not limited to:
 - **[kysely]**: query builder
 - **[opifex]**: MQTT client
 - **[postgres.js]**: PostgreSQL client
+- **[@deepkit/type]**: runtime type system
 
 All of these packages have minimal dependency counts (usually zero) and a
 strong focus on performance and user experience.
