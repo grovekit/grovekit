@@ -1,0 +1,33 @@
+{
+  "name": "@grovekit/database",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "gk-db-drop": "dist/bin/db-drop.js",
+    "gk-db-migrate": "dist/bin/db-migrate.js"
+  },
+  "scripts": {
+    "test": "node --test dist/**/*.test.js",
+    "ts:clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
+    "ts:build": "npm run ts:clean && tsc",
+    "ts:watch": "npm run ts:clean && tsc --watch",
+    "build": "npm run ts:build"
+  },
+  "author": "Jacopo Scazzosi <jacopo@scazzosi.com>",
+  "homepage": "https://github.com/grovekit/grovekit",
+  "license": "MIT",
+  "dependencies": {
+    "@deepkit/type": "^1.0.15",
+    "@grovekit/homie-core": "^0.0.1",
+    "@grovekit/utils": "^0.0.1",
+    "kysely": "^0.28.5",
+    "kysely-postgres-js": "^2.0.0",
+    "postgres": "^3.4.7"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ]
+}

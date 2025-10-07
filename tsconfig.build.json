@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.jsonc",
+  "references": [
+    { "path": "packages/libraries/homie-client" },
+    { "path": "packages/libraries/homie-core" },
+    { "path": "packages/libraries/utils" },
+    { "path": "packages/libraries/database" },
+    { "path": "packages/gateways/fronius" },
+    { "path": "packages/services/control" },
+    { "path": "packages/services/scribe" }
+  ],
+  "include": ["packages/*/*/src/**/*.ts"]
+}

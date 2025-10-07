@@ -1,0 +1,15 @@
+
+.q-columns-layout {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+
+    & > .q-layout-column {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0;
+        width: 0;
+    }
+
+}

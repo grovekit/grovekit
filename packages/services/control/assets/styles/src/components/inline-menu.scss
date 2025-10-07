@@ -1,0 +1,20 @@
+ul.q-inline-menu {
+    padding: 0;
+    display: block;
+    list-style-type: none;
+    & > li {
+        display: inline-block;
+        & > a {
+            display: inline-block;
+            padding: 0.2rem;
+            margin: 0 0.3rem;
+            color: var(--q-color-text-light);
+            border-bottom: 2px solid var(--q-color-text-light);
+            text-decoration: none;
+            &.q-active, &:hover {
+                color: var(--q-color-text-normal);
+                border-bottom: 2px solid var(--q-color-text-active);
+            }
+        }
+    }
+}

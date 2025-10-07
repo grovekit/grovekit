@@ -1,0 +1,62 @@
+
+:root {
+    --q-border-radius: 5px;
+
+    --q-padding-small: 0.1rem 0.2rem;
+
+    --q-color-bkg-item: rgb(248, 249, 250);
+    --q-color-btn-secondary: #BBB;
+    --q-color-btn-primary: #e66572;
+
+    --q-color-text-light: rgb(105, 105, 105);
+    --q-color-text-normal: #000;
+    --q-color-text-active: #dc3545;
+
+    --q-font-family-normal: AtkinsonHyperlegibleNext, sans-serif;
+    --q-font-family-monospace: B612Mono, /* AtkinsonHyperlegibleNext, */ monospace;
+}
+
+body {
+    font-family: var(--q-font-family-normal);
+    font-size: 16px;
+    padding: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration: underline;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+ul.q-unstyled-list {
+    padding: 0;
+    & > li {
+        list-style-type: none;
+    }
+}
+
+ul.q-inline-list {
+    padding: 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    & > li {
+        list-style-type: none;
+        display: inline-block;
+    }
+}
+
+.q-font-monospace {
+    font-family: var(--q-font-family-monospace);
+}
+
+.q-text-align-right {
+    text-align: right;
+}

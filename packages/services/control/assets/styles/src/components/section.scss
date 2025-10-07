@@ -1,0 +1,21 @@
+section.q-section {
+
+    margin-top: 1rem;
+
+    & > div.q-section-header {
+
+        display: flex;
+        justify-content: space-between;
+
+        & > h2.q-section-title {
+            font-weight: bolder;
+            font-size: 0.9rem;
+        }
+
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #ccc;
+    }
+
+
+
+}

@@ -1,0 +1,21 @@
+{
+  "workspaces": [
+    "packages/libraries/utils",
+    "packages/libraries/database",
+    "packages/libraries/homie-client",
+    "packages/libraries/homie-core",
+    "packages/gateways/fronius",
+    "packages/services/control",
+    "packages/services/scribe"
+  ],
+  "devDependencies": {
+    "@deepkit/type-compiler": "^1.0.15",
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "ts:build": "npm run ts:clean && tsc -b ./tsconfig.build.json",
+    "ts:watch": "npm run ts:clean && tsc -b ./tsconfig.build.json --watch",
+    "ts:clean": "rm -rf packages/*/*/dist && rm -f packages/*/*/tsconfig.tsbuildinfo && rm -f ./tsconfig.build.tsbuildinfo"
+  }
+}

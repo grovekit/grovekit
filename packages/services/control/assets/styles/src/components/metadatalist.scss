@@ -1,0 +1,29 @@
+dl.q-metadata-list {
+    width: 100%;
+    /* font-size: 0.9rem; */
+    /*display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem; */
+    div.q-dg {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    dd, dt {
+        display: block;
+    }
+    dt {
+        /* margin-left: 0.5rem; */
+        /* &:after { content: ':\00a0'; } */
+        width: min-content;
+        margin-right: 1rem;
+    }
+    dd {
+        min-width: 0;
+        font-family: var(--q-font-family-monospace);
+        text-overflow: clip;
+        overflow: hidden;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
+}
