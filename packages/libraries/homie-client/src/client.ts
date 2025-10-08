@@ -49,7 +49,6 @@ export class HomieClient {
     let consumer: AsyncIteratorConsumer<PublishPacket> | undefined;
 
     this.#client.onConnected = () => {
-      console.log('connected');
       queueMicrotask(this.onConnected);
       consumer = new AsyncIteratorConsumer<PublishPacket>(
         this.#client.messages(),
@@ -59,7 +58,6 @@ export class HomieClient {
 
     this.#client.onDisconnected = () => {
       this.#subscriptions.clear();
-      console.log('disconnected');
       queueMicrotask(this.onDisconnected);
       consumer?.stop();
       consumer = undefined;

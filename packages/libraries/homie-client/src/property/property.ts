@@ -92,7 +92,6 @@ export abstract class Property<B, T extends B = B> {
 
   async setValue(value: B) {
     if (!this._validate(value)) {
-      console.log('INVALID');
       return;
     }
     await this.#queue.push(async () => {

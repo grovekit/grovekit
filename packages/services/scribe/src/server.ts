@@ -156,7 +156,6 @@ const subscription = await subscribeToPropertySetRequests(db, async (req) => {
   const { topic, value } = req;
   const parsed_topic = TOPIC.parse(topic);
   if (parsed_topic?.type === 'property_set') {
-    console.log('YEEAAAAAh');
     await homie_client.publishPropertySet(parsed_topic, value);
   }
 

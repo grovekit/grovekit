@@ -39,7 +39,6 @@ export class HomieRootDevice extends Device {
 
   override async $_init() {
     await super.$_init();
-    console.log('AFTER DEVICE SUPER INIT');
     await this.setState(DEVICE_STATE.READY, false);
     for (const child of Object.values(this._children)) {
       await child.setState(DEVICE_STATE.READY, false);

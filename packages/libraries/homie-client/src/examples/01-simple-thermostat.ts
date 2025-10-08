@@ -46,9 +46,7 @@ import { HomieRootDevice } from "../device/root.js";
     return undefined;
   };
 
-  console.log('BEFORE READY()')
   await device.ready();
-  console.log('AFTER READY()')
 
 
 })().catch((err) => {
