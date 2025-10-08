@@ -62,7 +62,7 @@ export async function up(trx: Kysely<Tables>): Promise<void> {
     .addColumn('state', 'varchar(24)', col => col)
     .addColumn('info_fid', 'bigint', col => col.notNull().references('feeds.id'))
     .addColumn('state_fid', 'bigint', col => col.notNull().references('feeds.id'))
-    .addColumn('updated_at', 'timestamptz', col => col.notNull())
+    .addColumn('updated_at', 'bigint', col => col.notNull())
     .execute();
 
   await trx.schema.createIndex('unique_homie_device_id')

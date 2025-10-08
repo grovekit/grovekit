@@ -98,6 +98,13 @@ export class Node {
     };
   }
 
+  async $_init() {
+    for (const property of Object.values(this._properties)) {
+      console.log('BEFORE PROPERTY INIT');
+      await property.$_init();
+    }
+  }
+
   async $_advertise() {
     for (const property of Object.values(this._properties)) {
       await property.$_advertise();

@@ -18,13 +18,15 @@
     "@deepkit/type": "^1.0.15",
     "@grovekit/homie-core": "^0.0.1",
     "@seriousme/opifex": "^1.11.0",
-    "debug": "^4.4.1"
+    "debug": "^4.4.1",
+    "fastq": "^1.19.1"
   },
   "devDependencies": {
     "@types/debug": "^4.1.12"
   },
   "files": [
     "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "dist/**/*.d.ts",
+    "!dist/examples/**/*.*"
   ]
 }

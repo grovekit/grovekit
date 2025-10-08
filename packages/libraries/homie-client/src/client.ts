@@ -58,6 +58,7 @@ export class HomieClient {
     };
 
     this.#client.onDisconnected = () => {
+      this.#subscriptions.clear();
       console.log('disconnected');
       queueMicrotask(this.onDisconnected);
       consumer?.stop();
@@ -70,8 +71,6 @@ export class HomieClient {
   }
 
   async #subscribe(topic: string, qos: 0 | 1 | 2 = 0) {
-    if (this.#subscriptions.has(topic)) return;
-    this.#subscriptions.add(topic);
     await this.#client.subscribe({ subscriptions: [{ topicFilter: topic, qos }] });
   }
 
@@ -144,6 +143,17 @@ export class HomieClient {
     });
   }
 
+  async subscribeToPropertyTarget(parsed: PropertyTargetTopic) {
+    await this.#client.subscribe({
+      subscriptions: [
+        {
+          topicFilter: TOPIC.stringify(parsed),
+          qos: 2,
+        }
+      ],
+    });
+  }
+
   async handlePropertyValue(parsed: WithRaw<PropertyValueTopic>, value: RawValue) {
 
   }
@@ -181,6 +191,17 @@ export class HomieClient {
     });
   }
 
+  async subscribeToPropertySet(parsed: PropertySetTopic) {
+    await this.#client.subscribe({
+      subscriptions: [
+        {
+          topicFilter: TOPIC.stringify(parsed),
+          qos: 2,
+        }
+      ],
+    });
+  }
+
   #onError = (err: Error) => {
     console.error(err);
   };
@@ -195,7 +216,11 @@ export class HomieClient {
     switch (parsed_topic.type) {
       case 'device_state': {
         if (is<DEVICE_STATE>(payload)) {
-          await this.#subscribe(getDeviceWildcardTopic(parsed_topic));
+          const wildcard_topic = getDeviceWildcardTopic(parsed_topic);
+          if (!this.#subscriptions.has(wildcard_topic)) {
+            this.#subscriptions.add(wildcard_topic);
+            await this.#subscribe(wildcard_topic);
+          }
           await this.handleDeviceState(parsed_topic, payload)
             .catch(this.#onError);
         }

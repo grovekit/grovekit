@@ -28,19 +28,22 @@ export class HomieRootDevice extends Device {
     });
 
     this.#client.onConnected = () => {
-      this.$_advertise().catch(console.error);
+      this.$_init()
+        .then(() => this.$_advertise())
+        .catch(console.error);
     };
 
     this.#client.handlePropertySet = this.#handlePropertySet;
 
   }
 
-  async #init() {
+  override async $_init() {
+    await super.$_init();
+    console.log('AFTER DEVICE SUPER INIT');
     await this.setState(DEVICE_STATE.READY, false);
     for (const child of Object.values(this._children)) {
       await child.setState(DEVICE_STATE.READY, false);
     }
-    await this.#client.init();
   }
 
   _registerDevice(device: Device) {
@@ -52,8 +55,8 @@ export class HomieRootDevice extends Device {
   }
 
   _registerProperty(property: Property<any>) {
-    const device = property._node._device;
-    this.#client.subscribeToPropertyValue({ type: 'property_value', device: device.id, prefix: this.#prefix, property: property.id, node: property._node.id });
+    // const device = property._node._device;
+    // this.#client.subscribeToPropertyValue({ type: 'property_value', device: device.id, prefix: this.#prefix, property: property.id, node: property._node.id });
   }
 
   #handlePropertySet = async (parsed: PropertySetTopic, value: RawValue) => {
@@ -89,6 +92,16 @@ export class HomieRootDevice extends Device {
     await this._publishPropertyTarget(property, STRING.NULL);
   }
 
+  async _subscribePropertySet(property: Property<any>) {
+    await this.#client.subscribeToPropertySet({
+      type: 'property_set',
+      prefix: this.#prefix,
+      device: property._node._device.id,
+      node: property._node.id,
+      property: property.id,
+    });
+  }
+
   async _publishDeviceAlert(device: Device, alert_id: string, message: string) {
     await this.#client.publishDeviceAlert(
       { type: 'device_alert', prefix: this.#prefix, device: device.id, alert_id },
@@ -122,7 +135,7 @@ export class HomieRootDevice extends Device {
   }
 
   async ready() {
-    await this.#init();
+    await this.#client.init();
   }
 
 }

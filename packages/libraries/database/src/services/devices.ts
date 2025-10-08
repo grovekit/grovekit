@@ -37,11 +37,11 @@ export const registerDevice = async (db: DB, topic: DeviceTopic, state?: DEVICE_
         total_alerts: 0,
       });
     } else {
-      const patch: any = {
+      const patch = {
         state,
         type: info?.type,
         name: info?.name,
-        updated_at: new Date().toISOString(),
+        updated_at: Date.now(),
       };
       device = await updateDeviceById(trx, device.id, patch);
     }

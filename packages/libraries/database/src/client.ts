@@ -65,7 +65,7 @@ export const getDB = async (opts: DBOpts): Promise<DB> => {
     dialect: new PostgresJSDialect({
       postgres: dialect_client,
     }),
-    // log: ['query', 'error'],
+    log: ['query', 'error'],
   });
   ___setDriverClient(db, dialect_client);
   return db;

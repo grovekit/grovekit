@@ -83,6 +83,17 @@ export class Device {
     };
   }
 
+  async $_init() {
+    for (const node of Object.values(this._nodes)) {
+      await node.$_init();
+    }
+    console.log('AFTER NODE INIT');
+    for (const child of Object.values(this._children)) {
+      await child.$_init();
+    }
+    console.log('AFTER CHILD INIT');
+  }
+
   async $_advertise() {
     await this._root._publishDeviceState(this, this._state);
     await this._root._publishDeviceDescription(this);

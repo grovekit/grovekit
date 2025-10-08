@@ -1,7 +1,8 @@
 
 import { Node } from "../node/node.js";
 import { HomieRootDevice } from "../device/root.js";
-import { AsyncLock } from "../lock.js";
+import { AsyncTaskQueue } from "../taskqueue.js";
+import { PropertyFormat } from "@grovekit/homie-core";
 
 export enum DATATYPE {
   INTEGER = "integer",
@@ -38,19 +39,19 @@ export abstract class Property<B, T extends B = B> {
   readonly _node: Node;
   readonly _root: HomieRootDevice;
   readonly #info: FullPropertyInfo;
-  readonly #lock: AsyncLock;
+  readonly #queue: AsyncTaskQueue;
 
   constructor(id: string, info: FullPropertyInfo, value: B, node: Node) {
     this.#id = id;
     this.#info = info;
     this._node = node;
     this._root = node._device._root;
-    this.#lock = new AsyncLock();
+    this.#queue = new AsyncTaskQueue();
     this.#value = value as T;
     node._device._root._registerProperty(this);
     queueMicrotask(() => {
       if (!this._validate(value)) {
-        throw new Error(`invalid initial value ${value} for property ${JSON.stringify(info)}`);
+        throw new Error(`invalid initial value ${value} for property ${id}`);
       }
     });
   }
@@ -91,18 +92,19 @@ export abstract class Property<B, T extends B = B> {
 
   async setValue(value: B) {
     if (!this._validate(value)) {
+      console.log('INVALID');
       return;
     }
-    const release = await this.#lock.acquire();
-    await this.#setValue(value);
-    release();
+    await this.#queue.push(async () => {
+      await this.#setValue(value);
+    });
   }
 
-  async handleSet(value: T): Promise<Error | void> {
-
+  async handleSet(value: T): Promise<T | undefined> {
+    return value;
   }
 
-  async #setValue(value: T) {
+  #setValue = async (value: T) => {
     this.#value = value;
     const raw = this._serialize(value);
     await this._root._publishPropertyValue(this, raw);
@@ -117,17 +119,21 @@ export abstract class Property<B, T extends B = B> {
     if (!this._validate(value)) {
       return;
     }
-    const release = await this.#lock.acquire();
-    const seterr = await this.handleSet(value);
-    if (seterr instanceof Error) {
-      return;
-    }
-    await this.#setValue(value);
-    release();
+    await this.#queue.push(async () => {
+      if (await this.handleSet(value) !== undefined) {
+        await this.#setValue(value);
+      }
+    });
   }
 
   $_getDescription() {
     return this.#info;
+  }
+
+  async $_init() {
+    if (this.settable) {
+      await this._root._subscribePropertySet(this);
+    }
   }
 
   async $_advertise() {
