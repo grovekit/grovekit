@@ -1,4 +1,4 @@
-
+#!/usr/bin/env node
 import { getDB } from '../client.js';
 import {runAsyncMain} from '@grovekit/utils';
 import { migrateToLatest } from '../migrator.js';

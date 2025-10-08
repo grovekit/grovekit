@@ -1,4 +1,4 @@
-
+#!/usr/bin/env node
 import { getDB } from '../client.js';
 import { getDBOptsFromEnv } from '../config.js';
 import { runAsyncMain  } from '@grovekit/utils';

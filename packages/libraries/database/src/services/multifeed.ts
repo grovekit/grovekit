@@ -129,6 +129,7 @@ const makeAggrSelectColumn = (ref: string, op: AggregationOp, unit: AggregationU
 
 const getMultiFeedBaseAggrQuery = (db: DB, from: number, to: number, dir: 'asc' | 'desc', win: AggregationWindow, feeds: FeedOptsWithAggr[]): [string, string[]] => {
   assert(feeds.length > 0, 'No feeds provided');
+  assert(!feeds.find(f => f.datatype !== 'float' && f.datatype !== 'integer'), 'Cannot apply aggregations on non-numerical feeds');
   const vars = feeds.map((_, i) => `v${i + 1}`);
   const base = feeds.map((f, i) => `(
     select time_bucket_gapfill(${AGGR_WINDOW_MILLIS[win]}, dp.t, start => ${from}, finish => ${to}) as _t,
