@@ -5,5 +5,5 @@ ARG VERSION
 RUN mkdir /app
 WORKDIR /app
 RUN echo "{}" > package.json
-RUN npm install --registry=http://127.0.0.1:4873 @grovekit/scribe@$VERSION
+RUN npm install --registry=http://127.0.0.1:4874 @grovekit/scribe@$VERSION
 CMD ["node_modules/.bin/gk-scribe"]

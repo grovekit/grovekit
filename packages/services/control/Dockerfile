@@ -5,5 +5,5 @@ ARG VERSION
 RUN mkdir /app
 WORKDIR /app
 RUN echo "{}" > package.json
-RUN npm install --registry=http://127.0.0.1:4873 @grovekit/control@$VERSION
+RUN npm install --registry=http://127.0.0.1:4874 @grovekit/control@$VERSION
 CMD ["node_modules/.bin/gk-control"]

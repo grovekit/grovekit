@@ -13,6 +13,7 @@ Lightweight, self-hosted, opinionated IoT stack built on the
 - [Quick start](#quick-start)
 - [Building](#building)
 - [Goals](#goals)
+- [Principles](#principles)
 - [Dependencies](#dependencies)
 
 ## License
@@ -26,7 +27,8 @@ are welcome and encouraged.
 
 ## Status
 
-As of 2025-10-07, Grovekit is currently in pre-alpha development.
+As of 2025-10-07, Grovekit is currently in pre-alpha development. Production
+use is highly discouraged.
 
 ## Components
 
@@ -55,11 +57,17 @@ See [./docs/BUILDING.md](./docs/BUILDING.md)
 
 ## Goals
 
-Ultimately, the goal of Grovekit is to provide an IoT stack that can be
-easily grasped in its entirety, dependencies included, by a single person.
-This is primarily achieved through the adoption of development practices
-that _minimize mental and technical overheads_, including (but not limited
-to):
+- **Interoperability**: the stack be interoperable with other implementations
+  of the [Homie MQTT convention][homie].
+
+- **Maintainability**: the stack should be understandable and maintainable in
+  its entirety - dependencies included - by a single person.
+
+## Principles
+
+Development of the stack is characterizied by the adoption of practices and
+principles that _minimize mental and technical overheads_, including (but not
+limited to):
 
 - **Vertical integration**: though published as individual packages, all
   components of Grovekit's stack are type-checked and compiled as a cohesive
@@ -71,15 +79,16 @@ to):
   server-side, eliminating the mental burden of maintaining separate codebases
   and the performance bottlenecks of intermediate data serializations.
   Client-side JavaScript is only used when strictly necessary and kept strictly
-  vanilla, with no need for separate build steps.
+  vanilla.
 
-- **Manageable dependencies**: the entire stack has a total of 37 run-time
+- **Manageable dependencies**: the entire stack has a total of 39 run-time
   dependencies, _including indirect ones_. The overall dependency count,
-  including build-time dependencies, sits at 72 dependencies. A dependency
+  including build-time dependencies, sits at 74 dependencies. A dependency
   graph of this size enables human review, which is crucial for ensuring
   long-term quality, maintainability, security. Additionally, it fosters
   familiarity, which in turn increases the chances of contributing patches
-  upstream.
+  upstream. Constant effort is put on reducing the number of dependencies
+  even further.
 
 - **Fewer layers of abstraction**: the stack is tightly coupled to the MQTT
   protocol and [TimescaleDB]. Maintaining an opinionated codebase eliminates
@@ -94,8 +103,7 @@ to):
 ## Dependencies
 
 Grovekit would not be possible without an ecosystem of open-source projects
-that share some or all of its underlying principles. Honorable mentions
-include, but are not limited to:
+that share its underlying principles, including (but not limited to):
 
 - **[hono]**: HTTP framework
 - **[kysely]**: query builder
@@ -103,10 +111,8 @@ include, but are not limited to:
 - **[postgres.js]**: PostgreSQL client
 - **[@deepkit/type]**: runtime type system
 
-All of these packages have minimal dependency counts (usually zero) and a
-strong focus on performance and user experience.
-
-
+All of these packages have minimal dependency counts and a strong focus on
+performance and developer experience.
 
 [homie]: https://homieiot.github.io
 [hono]: https://hono.dev

@@ -1,0 +1,48 @@
+
+name: grovekit
+
+networks:
+  grovekit:
+    external: false
+
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.21
+    restart: unless-stopped
+    volumes:
+      - "mosquittodata:/mosquitto/data"
+      - "mosquittologs:/mosquitto/log"
+      - "./configs/mosquitto:/mosquitto/config"
+    ports:
+      - "127.0.0.1:1884:1883"
+      - "127.0.0.1:9002:9001"
+    networks:
+      - grovekit
+
+  timescaledb:
+    image: timescale/timescaledb:2.21.3-pg17
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - "postgresdata:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_DB: grovekit
+      POSTGRES_USER: grovekit
+      POSTGRES_PASSWORD: grovekit
+    restart: unless-stopped
+    networks:
+      - grovekit
+
+  verdaccio:
+    image: verdaccio/verdaccio
+    ports:
+      - "127.0.0.1:4874:4873"
+    restart: unless-stopped
+    networks:
+      - grovekit
+
+volumes:
+  mosquittologs:
+  mosquittodata:
+  postgresdata:
