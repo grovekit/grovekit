@@ -10,13 +10,19 @@ import { YURL } from 'yurl';
 import { cast, is } from '@deepkit/type';
 import { DEVICE_STATE } from '@grovekit/homie-core';
 
-interface DeviceListQueryParams extends ListQueryParams<SelectableDevice, 'name' | 'state' | 'open_alerts'> {
+interface DeviceListQueryParams extends ListQueryParams<SelectableDevice, 'name' | 'state' | 'open_alerts' | 'homie_prefix'> {
   state?: DEVICE_STATE;
 }
 
 // const DeviceListQueryParams_schema = getListQueryParamsSchema<SelectableDevice, 'name' | 'state'>(['name', 'state']);
 
-const columns: TableColumn<SelectableDevice, 'name' | 'state' | 'open_alerts'>[] = [
+const columns: TableColumn<SelectableDevice, 'name' | 'state' | 'open_alerts' | 'homie_prefix'>[] = [
+  {
+    label: 'Prefix',
+    expand: false,
+    sortable: 'homie_prefix',
+    render: ({ record }) => <>{record.homie_prefix}</>
+  },
   {
     label: 'Name',
     expand: true,

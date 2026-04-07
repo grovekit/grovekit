@@ -71,11 +71,12 @@ const devices = new LRUCache<string, { device?: SelectableDevice }>({
   max: 10000,
 });
 
-const getDeviceByHomieId = async (homie_id: string): Promise<SelectableDevice | undefined> => {
-  let match = devices.get(homie_id);
+const getDeviceByHomieId = async (homie_prefix: string, homie_id: string): Promise<SelectableDevice | undefined> => {
+  const key = `${homie_prefix}:${homie_id}`;
+  let match = devices.get(key);
   if (!match) {
-    const device = await selectDeviceByHomieId(db, homie_id);
-    devices.set(homie_id, (match = { device }), { ttl: 30_000 * 1 + Math.random() });
+    const device = await selectDeviceByHomieId(db, homie_prefix, homie_id);
+    devices.set(key, (match = { device }), { ttl: 30_000 * 1 + Math.random() });
   }
   return match.device;
 };
@@ -143,7 +144,7 @@ client.handlePropertyTarget = async (parsed, value) => {
 
 client.handleDeviceLog = async (parsed, value) => {
   logger.trace('device log %s %s', parsed.raw, value);
-  const device = await getDeviceByHomieId(parsed.device);
+  const device = await getDeviceByHomieId(parsed.prefix, parsed.device);
   if (device) {
     await insertDeviceLog(db, {
       device_id: device.id,
@@ -156,5 +157,5 @@ client.handleDeviceLog = async (parsed, value) => {
 
 client.handleDeviceAlert = async (parsed, value) => {
   logger.trace('device alert %s %s', parsed.raw, value);
-  await ingestDeviceAlert(db, parsed.device, parsed.alert_id, value);
+  await ingestDeviceAlert(db, parsed, value);
 };

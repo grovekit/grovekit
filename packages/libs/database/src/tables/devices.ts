@@ -12,6 +12,7 @@ export interface Device {
   root_id: string | null;
   parent_id: string | null;
   homie_id: string;
+  homie_prefix: string;
   // h_info: JSONColumnType<DeviceDescription | null, TypedJSON<DeviceDescription> | null>;
   state: DEVICE_STATE | null;
   info_fid: number;
@@ -25,7 +26,7 @@ export type SelectableDevice = Selectable<Device>;
 export type InsertableDevice = Insertable<Device>;
 export type UpdateableDevice = Updateable<Device>;
 
-export interface SelectDevicesOpts extends SelectOpts<Device, 'name' | 'state' | 'open_alerts' | 'total_alerts'> {
+export interface SelectDevicesOpts extends SelectOpts<Device, 'name' | 'state' | 'open_alerts' | 'total_alerts' | 'homie_prefix'> {
   state?: DEVICE_STATE;
 }
 
@@ -82,8 +83,9 @@ export const selectDeviceById = async (db: DB, id: string): Promise<SelectableDe
     .executeTakeFirst();
 };
 
-export const selectDeviceByHomieId = async (db: DB, homie_id: string): Promise<SelectableDevice | undefined> => {
+export const selectDeviceByHomieId = async (db: DB, homie_prefix: string, homie_id: string): Promise<SelectableDevice | undefined> => {
   return await getSelectDevicesQuery(db)
+    .where('homie_prefix', '=', homie_prefix)
     .where('homie_id', '=', homie_id)
     .limit(1)
     .selectAll('d')

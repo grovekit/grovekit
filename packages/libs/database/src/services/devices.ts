@@ -12,7 +12,7 @@ import { insertDatapointString, insertDatapointJson } from '../tables/datapoints
 
 export const registerDevice = async (db: DB, topic: DeviceTopic, state?: DEVICE_STATE, info?: DeviceDescription): Promise<SelectableDevice> => {
   return await ensureTrx(db, async (trx) => {
-    let device = await selectDeviceByHomieId(trx, topic.device);
+    let device = await selectDeviceByHomieId(trx, topic.prefix, topic.device);
     if (!device) {
       const state_feed = await insertFeed(trx, {
         type: FeedType.DEVICE_STATE,
@@ -30,6 +30,7 @@ export const registerDevice = async (db: DB, topic: DeviceTopic, state?: DEVICE_
         type: info?.type,
         state: state,
         homie_id: topic.device,
+        homie_prefix: topic.prefix,
         info_fid: info_feed.id,
         state_fid: state_feed.id,
         updated_at: Date.now(),
@@ -53,13 +54,13 @@ export const registerDeviceNodesAndProperties = async (db: DB, topic: DeviceTopi
   return await ensureTrx(db, async (trx) => {
     let device = await registerDevice(trx, topic, undefined, info);
     if (info.root) {
-      const root = await selectDeviceByHomieId(trx, info.root);
+      const root = await selectDeviceByHomieId(trx, topic.prefix, info.root);
       if (root) {
         device = await updateDeviceById(trx, device.id, { root_id: root.id });
       }
     }
     if (info.parent) {
-      const parent = await selectDeviceByHomieId(trx, info.parent);
+      const parent = await selectDeviceByHomieId(trx, topic.prefix, info.parent);
       if (parent) {
         device = await updateDeviceById(trx, device.id, { parent_id: parent.id });
       }
