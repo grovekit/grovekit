@@ -78,6 +78,7 @@ services:
       - grovekit
     environment:
       GK_LOG_LEVEL: ${GK_LOG_LEVEL}
+      GK_HOMIE_PREFIX: ${GK_HOMIE_PREFIX}
       GK_DB_PORT: 5432
       GK_DB_USERNAME: grovekit
       GK_DB_PASSWORD: grovekit

@@ -43,7 +43,7 @@ const client = new Client({
 });
 
 client.connect().then(() => {
-  client.enableAutoDiscovery('homie');
+  client.enableAutoDiscovery(config.homie_prefix);
 }).catch((err) => {
   console.error(err);
   process.exit(1);

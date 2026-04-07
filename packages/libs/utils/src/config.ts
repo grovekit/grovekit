@@ -3,6 +3,7 @@ import { ifNotNullish } from "./utils.js";
 
 export interface Env {
   GK_LOG_LEVEL?: 'trace' | 'debug' | 'info' | 'warn' | 'error';
+  GK_HOMIE_PREFIX?: string;
   GK_DASH_BIND_PORT?: number;
   GK_DASH_BIND_ADDR?: string;
   GK_DB_PORT?: number;
@@ -24,6 +25,7 @@ export const getEnv = (): Env => {
 
 export interface Config {
   log_level: 'trace' | 'debug' | 'info' | 'warn' | 'error';
+  homie_prefix: string[];
   dash_bind_port: number;
   dash_bind_addr: string;
   db_port: number;
@@ -43,6 +45,7 @@ export const getConfigFromEnv = (): Config => {
   const env = getEnv();
   const config: Config = {
     log_level: ifNotNullish(env.GK_LOG_LEVEL) ?? 'info',
+    homie_prefix: ifNotNullish(env.GK_HOMIE_PREFIX)?.split(',') ?? ['grovekit'],
     dash_bind_port: ifNotNullish(env.GK_DASH_BIND_PORT) ?? 8080,
     dash_bind_addr: ifNotNullish(env.GK_DASH_BIND_ADDR) ?? 'localhost',
     db_port: ifNotNullish(env.GK_DB_PORT) ?? 5432,
