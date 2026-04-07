@@ -1,0 +1,701 @@
+/* ============================================================================
+                            0. TABLE OF CONTENTS
+============================================================================ */
+
+/*
+
+    0.   TABLE OF CONTENTS
+    1.   RESETS
+    2.   BASE
+    2.1. LAYOUTS
+    3.   IFRAMES
+    4.   FORMS
+    5.   PAGINATOR
+    6.   TABLE
+    7.   SECTION
+    8.   PAGE
+    9.   METADATA LIST
+    10.  INLINE MENU
+    11.  MAIN
+    X.   SCRATCHPAD
+
+
+*/
+
+/* ============================================================================
+                                1. RESETS
+============================================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+input, button, textarea, select {
+    &:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+/* ============================================================================
+                                2. BASE
+============================================================================ */
+
+
+:root {
+    --q-border-radius: 5px;
+
+    --q-padding-small: 0.1rem 0.2rem;
+
+    --q-color-bkg-item: rgb(248, 249, 250);
+    --q-color-btn-secondary: #BBB;
+    --q-color-btn-primary: #e66572;
+
+    --q-color-text-light: rgb(105, 105, 105);
+    --q-color-text-normal: #000;
+    --q-color-text-active: #dc3545;
+
+    --q-font-family-normal: AtkinsonHyperlegibleNext, sans-serif;
+    --q-font-family-monospace: B612Mono, /* AtkinsonHyperlegibleNext, */ monospace;
+}
+
+body {
+    font-family: var(--q-font-family-normal);
+    font-size: 16px;
+    padding: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration: underline;
+}
+
+a, button {
+    cursor: pointer;
+}
+
+button, a.q-button {
+
+    display: inline-block;
+    appearance: none;
+    border: none;
+    border-radius: 3px;
+    /* height: 1.5rem; */
+    padding: 0.1em;
+    margin: none;
+    text-decoration: none;
+
+    &.q-primary {
+        background: var(--q-color-btn-primary);
+    }
+
+    &.q-secondary {
+        background: var(--q-color-btn-secondary);
+    }
+
+}
+
+ul.q-unstyled-list {
+    padding: 0;
+    & > li {
+        list-style-type: none;
+    }
+}
+
+ul.q-inline-list {
+    padding: 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    & > li {
+        list-style-type: none;
+        display: inline-block;
+    }
+}
+
+.q-font-monospace {
+    font-family: var(--q-font-family-monospace);
+}
+
+.q-text-align-right {
+    text-align: right;
+}
+
+/* ============================================================================
+                                2.1. LAYOUTS
+============================================================================ */
+
+.q-columns-layout {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+
+    & > .q-layout-column {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0;
+        width: 0;
+    }
+
+}
+
+
+/* ============================================================================
+                                3. IFRAMES
+============================================================================ */
+
+
+.q-iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+}
+
+.q-iframe-modal {
+    max-width: 800px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+iframe[name=q-bottom-modal-iframe] {
+    top: auto;
+    bottom: 33%;
+}
+
+
+html.q-iframe-modal-page, body.q-iframe-modal-page {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    background: #CCC;
+}
+
+.q-iframe-modal-page-frame {
+  /*width: 100%;*/
+  margin: 2rem;
+  border: 1px solid black;
+  background: white;
+}
+
+.q-iframe-modal-page-close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+}
+
+/* ============================================================================
+                                4. FORMS
+============================================================================ */
+
+input[type=checkbox] {
+    appearance: none;
+    vertical-align: middle;
+    width: 1.4em;
+    height: 1.4em;
+    font-size: 1.4em;
+    margin: -0.2em;
+    display: inline-block;
+    text-align: center;
+    background-color: #FFF;
+    border-radius: 0.2em;
+    border: 1px solid #000;
+}
+
+input[type=checkbox]:after {
+    position: relative;
+    top: 0.1em;
+    color: #DDD;
+    content: "\2713"; /* check mark */
+}
+
+input[type=checkbox]:checked:after {
+    color: black;
+}
+
+input[type=checkbox] {
+    cursor: pointer;
+}
+
+input[type=checkbox].q-checkbox-big {
+    /* width: 1.4em;
+    height: 1.4em;
+    margin: -0.2em -0.2em; */
+    /* font-size: 1.2em; */
+    /* zoom: 2; */
+
+}
+
+form.q-form-inline {
+
+  display: inline;
+
+  button {
+      display: inline;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      color: inherit;
+      text-decoration: underline;
+  }
+
+  input, select {
+      display: inline-block;
+  }
+
+}
+
+/* ============================================================================
+                                5. PAGINATOR
+============================================================================ */
+
+
+.q-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    width: 100%;
+    background: var(--q-color-bkg-item);
+    gap: 1rem;
+    height: 2rem;
+
+    & > span, & > a {
+        display: block;
+    }
+
+    & > .q-first:before { content: '<< '; }
+    & > .q-prev:before { content: '< '; }
+    & > .q-next:after { content: ' >'; }
+    & > .q-last:after { content: ' >>'; }
+
+    /* a {
+        display: block;
+        padding: 0.75rem;
+        background: var(--q-color-bkg-item);
+    } */
+
+    form {
+        /* height: 100%;
+        line-height: 100%;
+        margin-left: 1rem; */
+        display: flex;
+        gap: 1rem;
+
+        label {
+            display: block;
+        }
+
+        input {
+            /* display: block; */
+            margin-left: 1rem;
+            background: #FFF;
+            border: none;
+            /* box-shadow: none; */
+            appearance: none;
+            font-family: var(--q-font-family-monospace);
+            font-size: 0.75rem;
+        }
+
+        button {
+            display: block;
+        }
+    }
+
+    /* form input {
+        display: inline-block;
+        height: 1rem;
+    } */
+}
+
+
+/* ============================================================================
+                                6. TABLE
+============================================================================ */
+
+
+table.q-table {
+    table-layout: auto;
+    width: 100%;
+    tr {
+        background: var(--q-color-bkg-item);
+    }
+    th, td {
+        word-wrap: none;
+        white-space: nowrap;
+        padding: 0.75rem 1rem;
+    }
+    td.q-expand {
+        width: 100%;
+    }
+    td a {
+        font-weight: bold;
+    }
+    th > .q-sort-ctrls {
+        /* background: orange; */
+        /* font-size: 0.8em; */
+        /* font-style: italic; */
+        margin-left: 0.5rem;
+        & > a {
+            /* display: inline-block;
+            padding: 0.2rem;
+            height: 1rem; */
+            text-decoration: none;
+
+        }
+    }
+}
+
+/* ============================================================================
+                                7. SECTION
+============================================================================ */
+
+section.q-section {
+
+    margin-top: 1rem;
+
+    & > div.q-section-header {
+
+        display: flex;
+        justify-content: space-between;
+
+        & > h2.q-section-title {
+            font-weight: bolder;
+            font-size: 0.9rem;
+        }
+
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #ccc;
+    }
+
+}
+
+
+/* ============================================================================
+                                8. PAGE
+============================================================================ */
+
+#q-page-wrapper {
+    margin: 0 auto;
+    max-width: 1140px;
+}
+
+#q-site-header {
+  display: flex;
+  padding: 1rem 0;
+  align-items: center;
+  justify-content: start;
+}
+
+#q-site-title {
+    h1 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-right: 1rem;
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+#q-page-content {
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+#q-page-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.1em 0;
+    background:#CCC;
+    font-family: B612;
+
+}
+/* ============================================================================
+                            9. METADATA LIST
+============================================================================ */
+
+
+
+dl.q-metadata-list {
+    width: 100%;
+    /* font-size: 0.9rem; */
+    /*display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem; */
+    div.q-dg {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    dd, dt {
+        display: block;
+    }
+    dt {
+        /* margin-left: 0.5rem; */
+        /* &:after { content: ':\00a0'; } */
+        width: min-content;
+        margin-right: 1rem;
+    }
+    dd {
+        min-width: 0;
+        font-family: var(--q-font-family-monospace);
+        text-overflow: clip;
+        overflow: hidden;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
+}
+
+/* ============================================================================
+                            10. INLINE MENU
+============================================================================ */
+
+
+ul.q-inline-menu {
+    padding: 0;
+    display: block;
+    list-style-type: none;
+    & > li {
+        display: inline-block;
+        & > a {
+            display: inline-block;
+            padding: 0.2rem;
+            margin: 0 0.3rem;
+            color: var(--q-color-text-light);
+            border-bottom: 2px solid var(--q-color-text-light);
+            text-decoration: none;
+            &.q-active, &:hover {
+                color: var(--q-color-text-normal);
+                border-bottom: 2px solid var(--q-color-text-active);
+            }
+        }
+    }
+}
+
+
+/* ============================================================================
+                                11. MAIN
+============================================================================ */
+
+
+
+main.q-main {
+
+    & > .q-main-header {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 0.30rem solid var(--q-color-btn-secondary);
+        margin-bottom: 1rem;
+        height: 2.5rem;
+
+        & > .q-inline-menu {
+            height: 2.5rem;
+            li {
+                height: 2.5rem;
+                a {
+                    height: 2.5rem;
+                    line-height: 2.5rem;
+                    border-bottom-width: 0rem;
+                    padding: 0 1rem;
+                    margin-right: 0;
+                    margin-left: 1rem;
+                    &.q-active, &:active, &:hover {
+                        border-bottom-width: 0.30rem;
+                    }
+                }
+            }
+        }
+
+        & > .q-main-titles {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            letter-spacing: -0.05rem;
+
+            & > h1 {
+                margin: 0;
+                padding: 0;
+                line-height: 2rem;
+                height: 2rem;
+                font-size: 2.1rem;
+                position: relative;
+                bottom: -0.075rem;
+                font-weight: normal;
+            }
+
+            & > h2 {
+                font-size: 1.4rem;
+                font-weight: normal;
+                &:before {
+                    margin: 0 0.5rem;
+                    content: '>';
+                }
+            }
+        }
+
+
+
+    }
+
+    & > .q-main-body {
+        margin-top: 1rem;
+    }
+
+}
+
+
+
+/* ============================================================================
+                                X. SCRATCHPAD
+============================================================================ */
+
+
+.q-device {
+    background: var(--q-color-bkg-item);
+    margin: 0 0 1rem 0;
+    padding: 0.5rem;
+}
+.q-device-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 1rem;
+  }
+  dl {
+      width: 50%;
+      font-size: 0.9rem;
+      display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+      dd, dt {
+          display: inline-block;
+      }
+      dt {
+          margin-left: 0.5rem;
+          &:after { content: ':\00a0'; }
+      }
+      dd {
+          font-family: var(--q-font-family-monospace);
+      }
+  }
+}
+
+.q-value {
+    font-variant: small-caps;
+}
+
+.q-alerts-count {
+    display: inline-block;
+    padding: 0;
+    height: 1.3em;
+    width: 1.3em;
+    line-height: 1.5em;
+    text-align: center;
+    border-radius: 1.3em;
+    margin: 0 0 0 0.25em;
+    background: var(--q-color-btn-secondary);
+
+    &.q-danger {
+        color: inherit;
+        background: var(--q-color-btn-primary);
+    }
+}
+
+
+form.q-chart-opts {
+    fieldset {
+        margin: 1rem 0;
+        padding: 0.25rem 1rem;
+    }
+    li {
+        margin: 0.5rem 0;
+    }
+    label {
+        display: flex;
+        justify-content: space-between;
+        input, select {
+            display: inline-block;
+            width: 50%;
+        }
+    }
+
+    table {
+        table-layout: auto;
+        width: 100%;
+        tr {
+            /* background: var(--q-color-bkg-item); */
+        }
+        th, td {
+            word-wrap: none;
+            white-space: nowrap;
+            padding: 0.75rem 1rem;
+        }
+        /* td.q-expand {
+            width: 100%;
+        }
+        td a {
+            font-weight: bold;
+        }
+         */
+    }
+}
+
+.q-csv-pre {
+    font-family: var(--q-font-family-monospace);
+    font-size: 0.75rem;
+    overflow: auto;
+    width: 100%;
+    height: 300px;
+}

@@ -1,0 +1,19 @@
+{
+  "workspaces": [
+    "packages/libs/utils",
+    "packages/libs/database",
+    "packages/apps/control",
+    "packages/apps/scribe"
+  ],
+  "devDependencies": {
+    "@deepkit/type-compiler": "^1.0.19",
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2"
+  },
+  "scripts": {
+    "npm:clean": "rm -rf ./node_modules && rm -rf ./packages/*/*/node_modules",
+    "ts:build": "npm run ts:clean && tsc -b ./tsconfig.build.json",
+    "ts:watch": "npm run ts:clean && tsc -b ./tsconfig.build.json --watch",
+    "ts:clean": "rm -rf packages/*/*/dist && rm -f packages/*/*/tsconfig.tsbuildinfo && rm -f ./tsconfig.build.tsbuildinfo"
+  }
+}

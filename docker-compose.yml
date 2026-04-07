@@ -1,0 +1,95 @@
+
+name: grovekit
+
+networks:
+  grovekit:
+    external: false
+
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.21
+    restart: unless-stopped
+    volumes:
+      - "mosquittodata:/mosquitto/data"
+      - "mosquittologs:/mosquitto/log"
+      - "./docker/configs/mosquitto:/mosquitto/config"
+    ports:
+      - "${GK_BROKER_BIND_ADDR}:${GK_BROKER_BIND_PORT}:1883"
+    networks:
+      - grovekit
+    profiles:
+      - broker
+
+  timescaledb:
+    image: timescale/timescaledb:2.21.3-pg17
+    ports:
+      - "${GK_TSCALE_BIND_ADDR}:${GK_TSCALE_BIND_PORT}:5432"
+    volumes:
+      - "postgresdata:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_DB: grovekit
+      POSTGRES_USER: grovekit
+      POSTGRES_PASSWORD: grovekit
+    restart: unless-stopped
+    networks:
+      - grovekit
+
+  control:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: ["node", "./packages/apps/control/dist/server.js"]
+    networks:
+      - grovekit
+    environment:
+      GK_LOG_LEVEL: ${GK_LOG_LEVEL}
+      GK_DB_PORT: 5432
+      GK_DASH_BIND_PORT: 8080
+      GK_DASH_BIND_ADDR: 0.0.0.0
+      GK_DB_USERNAME: grovekit
+      GK_DB_PASSWORD: grovekit
+      GK_DB_DATABASE: grovekit
+      GK_DB_HOSTNAME: timescaledb
+      GK_BROKER_PORT: 1883
+      GK_BROKER_HOSTNAME: mosquitto
+    depends_on:
+      timescaledb:
+        condition: service_started
+    ports:
+      - "${GK_DASH_BIND_ADDR}:${GK_DASH_BIND_PORT}:8080"
+    healthcheck:
+      test: "wget -q -O- --timeout=2 http://127.0.0.1:8080/health || exit 1"
+      interval: 2s
+      timeout: 2s
+      retries: 3
+      start_period: 2s
+
+  scribe:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: ["node", "./packages/apps/scribe/dist/server.js"]
+    networks:
+      - grovekit
+    environment:
+      GK_LOG_LEVEL: ${GK_LOG_LEVEL}
+      GK_DB_PORT: 5432
+      GK_DB_USERNAME: grovekit
+      GK_DB_PASSWORD: grovekit
+      GK_DB_DATABASE: grovekit
+      GK_DB_HOSTNAME: timescaledb
+      GK_BROKER_PORT: 1883
+      GK_BROKER_HOSTNAME: mosquitto
+    depends_on:
+      timescaledb:
+        condition: service_started
+      control:
+        condition: service_healthy
+
+volumes:
+  mosquittologs:
+  mosquittodata:
+  postgresdata:

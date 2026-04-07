@@ -1,0 +1,47 @@
+{
+  "name": "@grovekit/control",
+  "version": "0.0.4",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test dist/**/*.test.js",
+    "ts:clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
+    "ts:build": "npm run ts:clean && tsc",
+    "ts:watch": "npm run ts:clean && tsc --watch",
+    "watch": "node --watch dist/server.js",
+    "build": "npm run scss:build &&npm run ts:build"
+  },
+  "bin": {
+    "gk-control": "./dist/bin/gk-control.js"
+  },
+  "author": "Jacopo Scazzosi <jacopo@scazzosi.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/grovekit/grovekit",
+  "dependencies": {
+    "@deepkit/type": "^1.0.19",
+    "@grovekit/database": "^0.0.1",
+    "@grovekit/homie-client": "^0.0.1-alpha.9",
+    "@grovekit/homie-core": "^0.0.1-alpha.4",
+    "@grovekit/utils": "^0.0.1",
+    "@hono/node-server": "^1.19.12",
+    "csv-stringify": "^6.7.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "debug": "^4.4.3",
+    "hono": "^4.12.11",
+    "loopyloop": "^4.0.2",
+    "lru-cache": "^11.3.1",
+    "pinetto": "^4.0.0",
+    "uid": "^2.0.2",
+    "yurl": "^4.0.1"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "assets/fonts/**/*.*",
+    "assets/scripts.js",
+    "assets/styles.css",
+    "assets/vendor/**/*.*"
+  ]
+}

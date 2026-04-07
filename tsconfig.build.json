@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.jsonc",
+  "references": [
+    { "path": "packages/libs/utils" },
+    { "path": "packages/libs/database" },
+    { "path": "packages/apps/control" },
+    { "path": "packages/apps/scribe" }
+  ],
+  "include": ["packages/*/*/src/**/*.ts"]
+}

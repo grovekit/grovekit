@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.base.jsonc",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+  },
+  "references": [
+    { "path": "../../libs/utils" },
+    { "path": "../../libs/database" },
+  ]
+}
