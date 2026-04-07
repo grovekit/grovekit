@@ -36,6 +36,10 @@ await migrateToLatest(db, logger);
 
 const client = new Client({
   url: new URL(`mqtt://${config.broker_hostname}:${config.broker_port}`),
+  version: config.broker_protocol,
+  client_id: config.broker_clientid,
+  username: config.broker_username,
+  password: config.broker_password,
 });
 
 client.connect().then(() => {

@@ -45,3 +45,13 @@ export const indexBy = <K extends string, T extends { [key in K]: string }>(arra
 export const arrayfy = <T>(value: T | T[]): T[] => {
   return Array.isArray(value) ? value : [value];
 };
+
+export const ifNotNullish = <T>(value: T): Exclude<T, null | undefined | ''> | undefined => {
+  if (typeof value === 'string' && value.length === 0) {
+    return undefined;
+  }
+  if (typeof value === 'undefined' || value === null) {
+    return undefined;
+  }
+  return value as Exclude<T, null | undefined | ''>;
+};
