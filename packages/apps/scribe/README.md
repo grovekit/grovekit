@@ -50,6 +50,7 @@ Scribe is configured entirely through environment variables.
 | Variable | Default | Description |
 | --- | --- | --- |
 | `GK_LOG_LEVEL` | `info` | Log verbosity: `trace`, `debug`, `info`, `warn`, or `error` |
+| `GK_HOMIE_PREFIX` | `homie` | Homie device prefixes for device autodiscovery, separated by commas |
 | `GK_DB_HOSTNAME` | `localhost` | TimescaleDB hostname |
 | `GK_DB_PORT` | `5432` | TimescaleDB port |
 | `GK_DB_DATABASE` | `grovekit` | Database name |

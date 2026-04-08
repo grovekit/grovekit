@@ -129,6 +129,7 @@ when running outside Docker).
 | Variable | Default | Description |
 | --- | --- | --- |
 | `GK_LOG_LEVEL` | `info` | Log verbosity: `trace`, `debug`, `info`, `warn`, or `error` |
+| `GK_HOMIE_PREFIX` | `homie` | Homie device prefixes for device autodiscovery, separated by commas |
 | `GK_DASH_BIND_ADDR` | `localhost` | Address the Control HTTP server listens on inside its container |
 | `GK_DASH_BIND_PORT` | `8080` | Port the Control HTTP server listens on inside its container |
 | `GK_DB_HOSTNAME` | `localhost` | TimescaleDB hostname |
