@@ -18,8 +18,6 @@ services:
       - "${GK_BROKER_BIND_ADDR}:${GK_BROKER_BIND_PORT}:1883"
     networks:
       - grovekit
-    profiles:
-      - broker
 
   timescaledb:
     image: timescale/timescaledb:2.21.3-pg17
@@ -57,6 +55,8 @@ services:
       GK_BROKER_USERNAME: ${GK_BROKER_USERNAME}
       GK_BROKER_PASSWORD: ${GK_BROKER_PASSWORD}
     depends_on:
+      mosquitto:
+        condition: service_started
       timescaledb:
         condition: service_started
     ports:
