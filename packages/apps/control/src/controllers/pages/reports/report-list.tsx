@@ -4,7 +4,7 @@ import { Table, TableColumn } from '../../../components/table.js';
 import { getMainMenuItems, HonoInstance, ListQueryParams } from '../../../utils.js';
 import { Main } from '../../../components/main.js';
 import { is } from '@deepkit/type';
-import { selectReports, SelectableReport } from '@grovekit/database/dist/tables/reports.js';
+import { selectReports, SelectableReport } from '@grovekit/database';
 import { ColumnsLayout } from '../../../components/columns.js';
 import { Section } from '../../../components/section.js';
 

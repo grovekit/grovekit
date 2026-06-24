@@ -2,7 +2,7 @@
 import { Page } from '../../../components/page.js';
 import { HonoContext, HonoInstance, getMainMenuItems } from '../../../utils.js';
 import { Main } from '../../../components/main.js';
-import { selectReportById, selectReportProperties } from '@grovekit/database/dist/tables/reports.js';
+import { selectReportById, selectReportProperties } from '@grovekit/database';
 import { PartialReportParams } from '../../../components/reports/types.js';
 import { ReportParams } from '../../../components/reports/types.js';
 import { flattenReportParams } from './utils.js';

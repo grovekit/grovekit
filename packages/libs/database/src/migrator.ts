@@ -3,7 +3,7 @@ import fs from 'fs/promises'
 import {
   Migrator,
   FileMigrationProvider
-} from 'kysely';
+} from 'kysely/migration';
 import { type DB, ensureNoTrx, ensureTrx } from './client.js';
 import { type Logger } from 'pinetto';
 

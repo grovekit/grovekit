@@ -19,10 +19,10 @@
   "homepage": "https://github.com/grovekit/grovekit",
   "license": "MIT",
   "dependencies": {
-    "@deepkit/type": "^1.0.19",
+    "@runtyped/type": "^2.0.0-alpha.3",
     "@grovekit/homie-core": "^0.0.1-alpha.4",
     "@grovekit/utils": "^0.0.1",
-    "kysely": "^0.28.15",
+    "kysely": "^0.29.2",
     "kysely-postgres-js": "^3.0.0",
     "postgres": "^3.4.9"
   },

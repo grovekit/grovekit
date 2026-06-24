@@ -23,7 +23,7 @@
     "@grovekit/homie-core": "^0.0.1-alpha.4",
     "@grovekit/utils": "^0.0.1",
     "debug": "^4.4.3",
-    "lru-cache": "^11.3.2"
+    "lru-cache": "^11.5.1"
   },
   "devDependencies": {
     "@types/debug": "^4.1.13"

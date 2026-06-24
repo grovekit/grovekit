@@ -1,10 +1,11 @@
 {
   "extends": "../../../tsconfig.base.jsonc",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
+    "rootDir": "./src",
+    "outDir": "./dist",
   },
   "references": [
     { "path": "../utils" },
-  ]
+  ],
+  "include": ["src"]
 }
