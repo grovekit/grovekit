@@ -75,7 +75,7 @@ deployment.
 | [date-fns] / [date-fns-tz] | Date formatting and timezone-aware rendering |
 | [lru-cache] | In-memory caching of frequently-read database records |
 | [csv-stringify] | Streaming CSV generation for report exports |
-| [@deepkit/type] | Runtime type validation for environment variables and config |
+| [@runtyped/type] | Runtime type validation for environment variables and config |
 | [debug] | Scoped debug logging |
 | [loopyloop] | Resilient async event loops |
 | [pinetto] | Structured logger (via `@grovekit/utils`) |
@@ -101,7 +101,7 @@ deployment.
 [date-fns-tz]: https://github.com/marnusw/date-fns-tz
 [lru-cache]: https://github.com/isaacs/node-lru-cache
 [csv-stringify]: https://csv.js.org/stringify
-[@deepkit/type]: https://deepkit.io/en/documentation/runtime-types/getting-started
+[@runtyped/type]: https://github.com/runtyped/runtyped
 [debug]: https://github.com/debug-js/debug
 [loopyloop]: https://github.com/nicolo-ribaudo/loopyloop
 [pinetto]: https://github.com/nicolo-ribaudo/pinetto

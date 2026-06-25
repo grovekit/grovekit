@@ -15,7 +15,7 @@
   "license": "MIT",
   "homepage": "https://github.com/grovekit/grovekit",
   "dependencies": {
-    "@runtyped/type": "^2.0.0-alpha.3",
+    "@runtyped/type": "^1.0.20",
     "date-fns": "^4.4.0",
     "date-fns-tz": "^3.2.0",
     "pinetto": "^4.0.0",

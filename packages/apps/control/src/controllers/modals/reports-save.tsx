@@ -5,7 +5,7 @@ import { HonoInstance } from "../../utils.js";
 import { IframeModalPage } from "../../components/iframe.js";
 import { unflattenReportParams } from "../pages/reports/utils.js";
 import { PartialReportParams, ReportParams } from "../../components/reports/types.js";
-import { ValidationErrorItem, is } from "@deepkit/type";
+import { ValidationErrorItem, is } from "@runtyped/type";
 import { mkId } from "@grovekit/utils";
 
 export const initReportsSaveModalController = (app: HonoInstance) => {

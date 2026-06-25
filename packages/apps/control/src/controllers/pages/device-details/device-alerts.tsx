@@ -6,7 +6,7 @@ import { getNumericQueryParam, HonoContext, ListQueryParams } from '../../../uti
 import { ALERT_STATUS, countDeviceAlerts, SelectableDevice, SelectableDeviceAlert, selectDeviceAlerts } from '@grovekit/database';
 import { Section } from '../../../components/section.js';
 import { Child } from 'hono/jsx';
-import { cast, is } from '@deepkit/type';
+import { cast, is } from '@runtyped/type';
 
 interface DeviceAlertsQueryParams extends ListQueryParams<SelectableDeviceAlert, 'updated_at'> {
   status?: ALERT_STATUS;

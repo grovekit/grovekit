@@ -33,7 +33,7 @@ import {
 } from '@grovekit/utils';
 
 import { stringify } from 'csv-stringify/sync';
-import { is, ValidationErrorItem } from "@deepkit/type";
+import { is, ValidationErrorItem } from "@runtyped/type";
 import assert from "node:assert";
 
 

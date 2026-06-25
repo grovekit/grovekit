@@ -5,7 +5,7 @@ import { SelectableDevice, SelectableNode, SelectableProperty, ExtendedSelectabl
 import { Section } from '../../../components/section.js';
 import { PaginatorOpts } from '../../../components/pagination.js';
 import { Child } from 'hono/jsx';
-import { cast } from '@deepkit/type';
+import { cast } from '@runtyped/type';
 import { PropertyValue } from '../../../components/value.js';
 
 

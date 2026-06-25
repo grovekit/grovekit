@@ -1,5 +1,5 @@
 
-import { is, ValidationErrorItem, validate } from "@deepkit/type";
+import { is, ValidationErrorItem, validate } from "@runtyped/type";
 import { PartialReportParams, ReportParams } from "../../../components/reports/types.js";
 import { collectReportDataTSV, unflattenReportParams } from "./utils.js";
 import  { HonoContext, HonoInstance } from "../../../utils.js";

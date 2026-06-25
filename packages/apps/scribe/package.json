@@ -19,8 +19,8 @@
   "homepage": "https://github.com/grovekit/grovekit",
   "dependencies": {
     "@grovekit/database": "^0.0.1",
-    "@grovekit/homie-client": "^0.0.1-alpha.11",
-    "@grovekit/homie-core": "^0.0.1-alpha.4",
+    "@grovekit/homie-client": "^0.1.0",
+    "@grovekit/homie-core": "^0.1.0",
     "@grovekit/utils": "^0.0.1",
     "debug": "^4.4.3",
     "lru-cache": "^11.5.1"

@@ -7,7 +7,7 @@ import { countDeviceLogsByDeviceId, SelectableDevice, SelectableDeviceLog, selec
 import { Section } from '../../../components/section.js';
 import { Child } from 'hono/jsx';
 import { LOG_LEVEL } from '@grovekit/homie-core';
-import { cast, is } from '@deepkit/type';
+import { cast, is } from '@runtyped/type';
 
 interface GETDeviceLogsQuery {
   levels?: LOG_LEVEL[];

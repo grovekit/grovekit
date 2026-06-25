@@ -7,7 +7,7 @@ import { HonoInstance, getMainMenuItems, ListQueryParams } from '../../utils.js'
 import { countDevices, SelectableDevice, selectDevices } from '@grovekit/database';
 import { Main } from '../../components/main.js';
 import { YURL } from 'yurl';
-import { cast, is } from '@deepkit/type';
+import { cast, is } from '@runtyped/type';
 import { DEVICE_STATE } from '@grovekit/homie-core';
 
 interface DeviceListQueryParams extends ListQueryParams<SelectableDevice, 'name' | 'state' | 'open_alerts' | 'homie_prefix'> {

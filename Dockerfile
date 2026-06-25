@@ -33,7 +33,7 @@ COPY ./packages/apps/scribe/src ./packages/apps/scribe/src
 COPY ./packages/libs/utils/src ./packages/libs/utils/src
 COPY ./packages/libs/database/src ./packages/libs/database/src
 
-RUN npm run ts:build
+RUN npm run build
 
 FROM base
 

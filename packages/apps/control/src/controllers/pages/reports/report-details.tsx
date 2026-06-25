@@ -6,7 +6,7 @@ import { selectReportById, selectReportProperties } from '@grovekit/database';
 import { NULL_REPORT_ID, PartialReportParams } from '../../../components/reports/types.js';
 import { ReportParams } from '../../../components/reports/types.js';
 import { flattenReportParams, unflattenReportParams } from './utils.js';
-import { is, ValidationErrorItem } from '@deepkit/type';
+import { is, ValidationErrorItem } from '@runtyped/type';
 import { updateReportOpts } from '@grovekit/database';
 import { ReportForm } from '../../../components/reports/form.js';
 import { Iframe } from '../../../components/iframe.js';

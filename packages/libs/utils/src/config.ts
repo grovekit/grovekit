@@ -1,4 +1,4 @@
-import { cast } from "@deepkit/type";
+import { cast } from "@runtyped/type";
 import { ifNotNullish } from "./utils.js";
 
 export interface Env {

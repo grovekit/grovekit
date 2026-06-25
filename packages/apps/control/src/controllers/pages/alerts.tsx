@@ -1,7 +1,7 @@
 
 import { ALERT_STATUS, countDeviceAlerts, selectDeviceAlerts, ExtendedSelectableDeviceAlert } from "@grovekit/database";
 import { getNumericQueryParam, HonoInstance, getMainMenuItems, ListQueryParams } from "../../utils.js";
-import { is, ValidationErrorItem, cast } from "@deepkit/type";
+import { is, ValidationErrorItem, cast } from "@runtyped/type";
 import { Table } from "../../components/table.js";
 import { Section } from "../../components/section.js";
 import { ColumnsLayout } from "../../components/columns.js";

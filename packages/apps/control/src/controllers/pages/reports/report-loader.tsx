@@ -6,7 +6,7 @@ import { selectReportById, selectReportProperties } from '@grovekit/database';
 import { PartialReportParams } from '../../../components/reports/types.js';
 import { ReportParams } from '../../../components/reports/types.js';
 import { flattenReportParams } from './utils.js';
-import { is, ValidationErrorItem } from '@deepkit/type';
+import { is, ValidationErrorItem } from '@runtyped/type';
 
 export const reportLoaderController = (app: HonoInstance) => {
 

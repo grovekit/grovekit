@@ -4,7 +4,7 @@ import { HonoInstance } from "../../utils.js";
 import { Child } from "hono/jsx";
 import { PropertySetTopic, serializeValue, TOPIC } from "@grovekit/homie-core";
 import { EnumFormat } from "@grovekit/homie-core";
-import { is, ValidationErrorItem } from "@deepkit/type";
+import { is, ValidationErrorItem } from "@runtyped/type";
 
 export const initPropertiesSetValueModalController = (app: HonoInstance) => {
 

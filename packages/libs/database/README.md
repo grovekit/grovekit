@@ -42,7 +42,7 @@ Built on [Kysely] (SQL query builder), [postgres.js] (PostgreSQL client), and
   (or joins an existing one), and `isTrx` / `ensureNoTrx` guard against
   accidental nesting.
 - **Runtime type validation** — environment inputs and configuration shapes are
-  validated at runtime via [@deepkit/type].
+  validated at runtime via [@runtyped/type].
 
 ### Feed types
 
@@ -317,7 +317,7 @@ windows: `second`, `minute`, `hour`, `day`, `week`, `month`, `year`.
 | [postgres.js] | PostgreSQL client |
 | [@grovekit/homie-core] | Homie type definitions (datatypes, topic shapes) |
 | [@grovekit/utils] | Shared utilities — logging, ID generation, typed JSON |
-| [@deepkit/type] | Runtime type validation |
+| [@runtyped/type] | Runtime type validation |
 
 ## License
 
@@ -331,4 +331,4 @@ windows: `second`, `minute`, `hour`, `day`, `week`, `month`, `year`.
 [kysely-postgres-js]: https://github.com/igalklebanov/kysely-postgres-js
 [@grovekit/homie-core]: https://github.com/grovekit/homie-core
 [@grovekit/utils]: ../utils
-[@deepkit/type]: https://deepkit.io/en/documentation/runtime-types/getting-started
+[@runtyped/type]: https://github.com/runtyped/runtyped

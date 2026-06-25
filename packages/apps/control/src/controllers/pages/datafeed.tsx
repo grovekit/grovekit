@@ -2,7 +2,7 @@
 import { Client } from "@grovekit/homie-client";
 import { HonoInstance, prettyRawValue } from "../../utils.js";
 import { SSEStreamingApi, streamSSE } from "hono/streaming";
-import { is } from "@deepkit/type";
+import { is } from "@runtyped/type";
 import { Deferred } from "@grovekit/utils";
 import { LRUCache } from "lru-cache";
 import { DB, FeedType, SelectableFeed, selectFeedByTypeAndTopic } from "@grovekit/database";

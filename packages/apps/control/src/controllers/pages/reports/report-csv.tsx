@@ -3,7 +3,7 @@ import { PartialReportParams, ReportParams } from '../../../components/reports/t
 import { unflattenReportParams } from './utils.js';
 import { Frame } from '../../../components/frame.js';
 import { HonoContext, HonoInstance } from '../../../utils.js';
-import { is } from '@deepkit/type';
+import { is } from '@runtyped/type';
 import { collectReportData } from './utils.js';
 import { stringify } from 'csv-stringify/sync';
 

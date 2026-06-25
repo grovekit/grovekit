@@ -6,15 +6,15 @@
     "packages/apps/scribe"
   ],
   "devDependencies": {
-    "@runtyped/type-compiler": "^2.0.0-alpha.3",
+    "@runtyped/type-compiler": "^1.0.20",
     "@types/node": "^26.0.0",
     "typescript": "^6.0.3"
   },
   "scripts": {
     "npm:clean": "rm -rf ./node_modules && rm -rf ./packages/*/*/node_modules",
-    "ts:build": "npm run ts:clean && tsc -b ./tsconfig.build.json",
-    "ts:watch": "npm run ts:clean && tsc -b ./tsconfig.build.json --watch",
+    "ts:build": "npx runtyped-install-transformer && npm run ts:clean && tsc -b ./tsconfig.build.json",
+    "ts:watch": "npx runtyped-install-transformer && npm run ts:clean && tsc -b ./tsconfig.build.json --watch",
     "ts:clean": "rm -rf packages/*/*/dist && rm -f packages/*/*/tsconfig.tsbuildinfo",
-    "postinstall": "npx runtyped-install-transformer"
+    "build": "npm run ts:build"
   }
 }
