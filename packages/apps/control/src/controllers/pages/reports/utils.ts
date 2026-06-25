@@ -60,7 +60,7 @@ const calcTimeRangeFromOpts = (opts: ReportOpts): [from: number, to: number] => 
 };
 
 const seriesToFeedOpts = async (db: DB, series: ReportSeriesOpts[]): Promise<(FeedOpts | FeedOptsWithAggr)[]> => {
-  const properties = await selectPropertiesByIds(db, series.map(s => s.property_id));
+  const properties = await Promise.all(series.map(s => selectPropertyById(db, s.property_id, true)));
   return properties.map((p, i) => ({ ...series[i], feed_id: p.value_fid, datatype: p.datatype }));
 };
 

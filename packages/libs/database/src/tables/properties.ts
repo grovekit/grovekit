@@ -78,13 +78,16 @@ export const insertProperty = async (db: DB, node: InsertableProperty): Promise<
     .executeTakeFirstOrThrow();
 };
 
-export const selectPropertyById = async (db: DB, id: string): Promise<ExtendedSelectableProperty | undefined> => {
+export async function selectPropertyById(db: DB, id: string): Promise<ExtendedSelectableProperty | undefined>;
+export async function selectPropertyById(db: DB, id: string, throw_if_not_found: true): Promise<ExtendedSelectableProperty>;
+export async function selectPropertyById(db: DB, id: string, throw_if_not_found: false): Promise<ExtendedSelectableProperty | undefined>;
+export async function selectPropertyById(db: DB, id: string, throw_if_not_found: boolean = false): Promise<ExtendedSelectableProperty | undefined> {
   const query = getSelectPropertiesWithValuesQuery(db, { id })
     .limit(1)
     .selectAll('p')
     .select('d.name as device_name')
     .select('f.topic as value_topic');
-  return await query.executeTakeFirst();
+  return throw_if_not_found ? await query.executeTakeFirstOrThrow() : await query.executeTakeFirst();
 };
 
 export const selectPropertiesByIds = async (db: DB, ids: string[]): Promise<ExtendedSelectableProperty[]> => {
