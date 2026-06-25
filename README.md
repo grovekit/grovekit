@@ -78,13 +78,10 @@ cd grovekit
 # 2. Create and edit your environment file
 cp .env-example .env
 
-# 3. If you do not have a broker already
-docker compose --profile broker up
-
-# 4. Build and start all services in the background
+# 3. Build and start all services in the background
 docker compose up --build -d
 
-# 5. Open the Control dashboard at http://localhost:8080
+# 4. Open the Control dashboard at http://localhost:8080
 #    URL may change dependending on your environment variables
 ```
 
@@ -92,15 +89,10 @@ The stack starts three containers:
 
 | Container | Role | Default exposed port |
 | --- | --- | --- |
+| `mosquitto` | MQTT broker | `GK_BROKER_BIND_PORT` |
 | `timescaledb` | Database | `GK_TSCALE_BIND_PORT` |
 | `control` | Management dashboard | `GK_DASH_BIND_PORT` |
 | `scribe` | Data ingestion | _(none)_ |
-
-Additionally, step 3. starts the `mosquitto` container:
-
-| Container | Role | Default exposed port |
-| --- | --- | --- |
-| `mosquitto` | MQTT broker | `GK_BROKER_BIND_PORT` |
 
 ## Environment Variables
 
